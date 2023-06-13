@@ -4,12 +4,8 @@ services:
   backend:
     build:
       context: ./backend
-      target: development
-    container_name: cs_backend
-    command: npm run start:dev
-    volumes:
-      - ./backend:/usr/src/app/backend
-      - /usr/src/app/backend/node_modules
+      target: production
+    container_name: cs_prod_backend
     ports:
       - 3000:3000
     env_file:
@@ -22,14 +18,10 @@ services:
   frontend:
     build:
       context: ./frontend
-      target: development
-    container_name: cs_frontend
-    command: npm run dev -- --host
-    volumes:
-      - ./frontend:/usr/src/app/frontend
-      - /usr/src/app/frontend/node_modules
+      target: production
+    container_name: cs_prod_frontend
     ports:
-      - 5173:5173
+      - 80:80
     env_file:
       - ./backend/.env
     networks:
@@ -39,7 +31,7 @@ services:
 
   mysql:
     image: mysql:8.0
-    container_name: cs_mysql
+    container_name: cs_prod_mysql
     volumes:
       - mysql:/var/lib/mysql
     ports:
