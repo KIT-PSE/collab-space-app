@@ -8,10 +8,11 @@ services:
     container_name: cs_backend
     command: npm run start:dev
     volumes:
-      - ./backend:/usr/src/app/backend
-      - /usr/src/app/backend/node_modules
+      - ./backend:/home/www/backend
+      - /home/www/backend/node_modules
     ports:
       - 3000:3000
+      - 9223:9222
     env_file:
       - ./backend/.env
     networks:
